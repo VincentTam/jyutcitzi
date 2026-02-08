@@ -1,0 +1,10 @@
+#import "../utils.typ": split-jyutping
+
+// Test standard cases
+#assert(split-jyutping("waa") == ("w", "aa"))
+#assert(split-jyutping("sing") == ("s", "ing"))
+
+// Test edge cases
+#assert(split-jyutping("a") == ("", "a"))      // No initial
+#assert(split-jyutping("ng") == ("ng", ""))   // Initial only
+#assert(split-jyutping("m") == ("m", ""))     // Syllabic nasal
