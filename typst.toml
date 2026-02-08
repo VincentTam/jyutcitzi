@@ -5,5 +5,5 @@ entrypoint = "lib.typ"
 authors = ["Vincent Tam"]
 description = "A system for displaying Jyutcitzi characters (粵切字)."
 repository = "https://github.com/VincentTam/riesketcher"
-exclude = ["manual.typ", "manual.pdf"]
+exclude = ["sample.png"]
 keywords = ["jyutping", "jyutcitzi", "cantonese"]
