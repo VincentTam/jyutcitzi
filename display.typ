@@ -4,12 +4,13 @@
 /// Combine 2 parts: combine mode
 /// - "-" for stacking part 1 on top of part 2;
 /// - "|" for combining them side-by-side
-#let combine-parts = (part1, part2, combine-mode) => {
+#let combine-parts = (part1, part2, combine-mode) => context {
   let combined
   if combine-mode == "-" {
+    let parts-gap = measure(part1).height * 0.3
     combined = scale(
-      stack(part1, part2, spacing: 10%),
-      origin: bottom+left, y: 50%, reflow: true
+      stack(part1, part2, spacing: parts-gap),
+      origin: bottom+left, y: 43.5%, reflow: true
     )
   } else {
     combined = scale([#part1#part2], origin: bottom+left, x: 50%, reflow: true)
