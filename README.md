@@ -6,7 +6,7 @@ A Typst package for rendering
 
 ## Features
 
-- Jyutcitzi generate from jyutping (粵拼)
+- Jyutcitzi generation from jyutping (粵拼)
 - Compound initial support
 
 ## Usage
@@ -16,11 +16,11 @@ A Typst package for rendering
 // Set to any font that contains the Jyutcitzi alphabets
 #set text(font: "Noto Sans CJK TC")
 
-#jyutcitzi("keu")#jyutcitzi("leu")#jyutcitzi("liu")#jyutcitzi("leng")粵字
+#jyutcitzi("keu leu liu lang")嘅粵字
 
-"Skill" #jyutcitzi("ge")#jyutcitzi("jyut")#jyutcitzi("zi")係「#combine-parts(
+"Skill"#jyutcitzi("ge jyut zi")係「#combine-parts(
   combine-parts(beginnings-dict.s.at(0), beginnings-dict.k.at(0), "-"),
-  "頁",
+  "么",
   "|"
 )」。
 ```
