@@ -13,9 +13,5 @@
 - Null Final: #jyutcitzi("s")
 - Compound Initial: #combine-parts(combine-parts(beginnings-dict.s.at(0), beginnings-dict.k.at(0), "-"), "頁", "|")
 
-// Test a grid of common characters
-#grid(
-  columns: 5,
-  gutter: 10pt,
-  ..("jyut", "ping", "faat", "cit", "zi").map(jyutcitzi)
-)
+// Test a multi-line string containing jyutping
+#jyutcitzi("jyut\tping\nfaat cit zi")

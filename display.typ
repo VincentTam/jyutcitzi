@@ -6,7 +6,7 @@
 /// - "|" for combining them side-by-side
 /// parts-gap is the amount of em for separation.  It defaults to 0.1em
 /// only applies when two parts are stacked one on top of another
-#let combine-parts(part1, part2, combine-mode, parts-gap: 0.1) = context {
+#let combine-parts(part1, part2, combine-mode, parts-gap: 0.1) = {
   let combined
   if combine-mode == "-" {
     set text(top-edge: "ascender", bottom-edge: "descender")

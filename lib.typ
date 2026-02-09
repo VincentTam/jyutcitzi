@@ -2,5 +2,8 @@
 #import "data.typ": *
 #import "display.typ": simple-jyutcitzi-display, combine-parts
 
-// Re-export functions for the user
-#let jyutcitzi = simple-jyutcitzi-display
+#let jyutcitzi(input) = {
+  show regex("\S+"): m => simple-jyutcitzi-display(m.text)
+  show regex(" "): m => ""
+  input
+}
