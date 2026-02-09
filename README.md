@@ -1,6 +1,8 @@
-# Jyutcitzi
+# Se-Jyutcitzi
 
-A Typst package for rendering [Jyutcitzi (粵切字)](https://jyutcitzi.github.io/table).
+A Typst package for rendering
+[Jyutcitzi (粵切字)](https://jyutcitzi.github.io/table).  "Se-Jyutcitzi" means
+"to write Jyutcitzi", and it is pronounced as **[sɛː˧˥ jyːt˨ t͡sʰiːt˧ t͡siː˨]**.
 
 ## Features
 
