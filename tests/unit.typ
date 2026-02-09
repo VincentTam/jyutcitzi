@@ -5,6 +5,6 @@
 #assert(split-jyutping("sing") == ("s", "ing"))
 
 // Test edge cases
-#assert(split-jyutping("a") == ("", "a"))      // No initial
-#assert(split-jyutping("ng") == ("ng", ""))   // Initial only
-#assert(split-jyutping("m") == ("m", ""))     // Syllabic nasal
+#assert(split-jyutping("a") == (none, "a"))      // No initial
+#assert(split-jyutping("ng") == ("ng", none))   // Initial only
+#assert(split-jyutping("m") == ("m", none))     // Syllabic nasal

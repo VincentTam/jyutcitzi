@@ -1,5 +1,5 @@
-// Dictionary mapping jyutping beginning to jyutcitzi part 1 and combine mode
-#let beginnings-dict = (
+// Dictionary mapping Jyutping initials to Jyutcitzi part 1 and combine mode
+#let initials-dict = (
   a: ("⺍", "-"),
   b: ("比", "-"),
   p: ("并", "|"),
@@ -22,8 +22,8 @@
   ng: (scale([乂乂], x: 50%, reflow: true), "-"),
 )
 
-// Dictioary mapping jyutping ending to jyutcitzi part 2
-#let endings-dict = (
+// Dictioary mapping Jyutping finals to Jyutcitzi part 2
+#let finals-dict = (
   aa: "乍",
   aai: "介",
   aau: "丂",

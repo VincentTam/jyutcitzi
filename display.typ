@@ -22,7 +22,7 @@
 }
 
 // Return the Jyutcitzi for syllabic nasal sounds
-#let sn-char(c) = {
+#let syllabic-nasal-char(c) = {
   let box-dy = if c == "m" { -0.2em } else if c == "ng" { -0.6em }
   let dot-pos = if c == "m" { bottom + right } else if c == "ng" { top + right }
   box(
@@ -36,27 +36,27 @@
 
 /// Transform jyutping (without digit) to jyutcitzi
 #let simple-jyutcitzi-display = jyutping => {
-  let (beginning, ending) = split-jyutping(jyutping)
-  if beginning != "" or ending != "" {
+  let (jp-initial, jp-final) = split-jyutping(jyutping)
+  if jp-initial != none or jp-final != none {
     let part1
     let part2
     let combine-mode
     let result
-    if ending == "" and (beginning == "m" or beginning == "ng") {
-      result = sn-char(beginning)
+    if jp-final == none and (jp-initial == "m" or jp-initial == "ng") {
+      result = syllabic-nasal-char(jp-initial)
     } else {
-      if beginning == "" {
-        part1 = beginnings-dict.a.at(0)
-        part2 = endings-dict.at(ending)
+      if jp-initial == none {
+        part1 = initials-dict.a.at(0)
+        part2 = finals-dict.at(jp-final)
         combine-mode = "-"
-      } else if ending == "" {
-        part1 = beginnings-dict.a.at(0)
-        part2 = beginnings-dict.at(beginning).at(0)
+      } else if jp-final == none {
+        part1 = initials-dict.a.at(0)
+        part2 = initials-dict.at(jp-initial).at(0)
         combine-mode = "-"
       } else {
-        part1 = beginnings-dict.at(beginning).at(0)
-        part2 = endings-dict.at(ending).at(0)
-        combine-mode = beginnings-dict.at(beginning).at(1)
+        part1 = initials-dict.at(jp-initial).at(0)
+        part2 = finals-dict.at(jp-final).at(0)
+        combine-mode = initials-dict.at(jp-initial).at(1)
       }
       result = combine-parts(part1, part2, combine-mode)
     }
