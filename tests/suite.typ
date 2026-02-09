@@ -6,10 +6,11 @@
 = Jyutcitzi Smoke Test
 
 // Test various split modes
+- Syllabic nasal sound: #jyutcitzi("m")
 - Horizontal: #jyutcitzi("pin")
 - Vertical: #jyutcitzi("di") 
 - Null Initial: #jyutcitzi("aa")
-- Null Final: #jyutcitzi("ng")
+- Null Final: #jyutcitzi("s")
 - Compound Initial: #combine-parts(combine-parts(beginnings-dict.s.at(0), beginnings-dict.k.at(0), "-"), "頁", "|")
 
 // Test a grid of common characters
