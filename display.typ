@@ -4,18 +4,19 @@
 /// Combine 2 parts: combine mode
 /// - "-" for stacking part 1 on top of part 2;
 /// - "|" for combining them side-by-side
-/// parts-gap is the amount of em for separation.  It defaults to 0.1em
-/// only applies when two parts are stacked one on top of another
-#let combine-parts(part1, part2, combine-mode, tone: none, parts-gap: 0.1) = {
+#let combine-parts(part1, part2, combine-mode, tone: none) = {
   let combined
   let tone-mapped = if tone != none { tone-map.at(tone) } else { none }
 
   if combine-mode == "-" {
-    set text(top-edge: "ascender", bottom-edge: "descender")
-    let scaling-factor = 1/(2 + parts-gap * 2) * 100%
-    combined = scale(
-      stack(part1, part2, spacing: 2 * parts-gap * 1em),
-      origin: bottom+left, y: scaling-factor, reflow: true
+    combined = rotate(
+      90deg,
+      scale(
+        [#box(rotate(-90deg, part1))#box(rotate(-90deg, part2))],
+        origin: bottom+left,
+        x: 50%,
+        reflow: true
+      )
     )
   } else {
     combined = scale([#part1#part2], origin: bottom+left, x: 50%, reflow: true)

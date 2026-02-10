@@ -12,7 +12,7 @@ A Typst package for rendering
 ## Usage
 
 ```typst
-#import "@preview/se-jyutcitzi:0.2.1": *
+#import "@preview/se-jyutcitzi:0.2.2": *
 // Set to any font that contains the Jyutcitzi alphabets
 #set text(font: "Noto Sans CJK TC")
 
