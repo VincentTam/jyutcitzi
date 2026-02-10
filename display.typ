@@ -41,25 +41,19 @@
     let part1
     let part2
     let combine-mode
-    let result
-    if jp-final == none and (jp-initial == "m" or jp-initial == "ng") {
-      result = syllabic-nasal-char(jp-initial)
+    if jp-initial == none {
+      part1 = initials-dict.a.at(0)
+      part2 = finals-dict.at(jp-final)
+      combine-mode = "-"
+    } else if jp-final == none {
+      part1 = initials-dict.a.at(0)
+      part2 = initials-dict.at(jp-initial).at(0)
+      combine-mode = "-"
     } else {
-      if jp-initial == none {
-        part1 = initials-dict.a.at(0)
-        part2 = finals-dict.at(jp-final)
-        combine-mode = "-"
-      } else if jp-final == none {
-        part1 = initials-dict.a.at(0)
-        part2 = initials-dict.at(jp-initial).at(0)
-        combine-mode = "-"
-      } else {
-        part1 = initials-dict.at(jp-initial).at(0)
-        part2 = finals-dict.at(jp-final).at(0)
-        combine-mode = initials-dict.at(jp-initial).at(1)
-      }
-      result = combine-parts(part1, part2, combine-mode)
+      part1 = initials-dict.at(jp-initial).at(0)
+      part2 = finals-dict.at(jp-final).at(0)
+      combine-mode = initials-dict.at(jp-initial).at(1)
     }
-    result
+    combine-parts(part1, part2, combine-mode)
   }
 }

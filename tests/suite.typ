@@ -6,7 +6,7 @@
 = Jyutcitzi Smoke Test
 
 // Test various split modes
-- Syllabic nasal sound: #jyutcitzi("m")
+- Syllabic nasal sound: #jyutcitzi("ng")
 - Horizontal: #jyutcitzi("pin")
 - Vertical: #jyutcitzi("di") 
 - Null Initial: #jyutcitzi("aa")
@@ -18,5 +18,5 @@
     "|"
   )
 
-// Test a multi-line string containing jyutping
-#jyutcitzi("jyut\tping\nfaat cit zi")
+// Test a multi-line space-delimited string containing jyutping
+#jyutcitzi("混合 jyut\tping faat\ncit zi 輸入")

@@ -1,9 +1,10 @@
-#import "utils.typ": split-jyutping
+#import "utils.typ": *
 #import "data.typ": *
-#import "display.typ": simple-jyutcitzi-display, combine-parts
+#import "display.typ": *
 
 #let jyutcitzi(input) = {
-  show regex("\S+"): m => simple-jyutcitzi-display(m.text)
+  show re-other: m => simple-jyutcitzi-display(m.text)
+  show re-nasal: m => syllabic-nasal-char(m.text)
   show regex(" "): m => ""
   input
 }
