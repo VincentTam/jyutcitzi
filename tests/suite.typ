@@ -9,14 +9,15 @@
 - Syllabic nasal sound: #jyutcitzi("ng")
 - Horizontal: #jyutcitzi("pin")
 - Vertical: #jyutcitzi("di") 
-- Null Initial: #jyutcitzi("aa")
-- Null Final: #jyutcitzi("s")
-- Compound Initial:
+- Null initial: #jyutcitzi("aa")
+- Null final: #jyutcitzi("s")
+- Compound initial:
   #combine-parts(
     combine-parts(initials-dict.s.at(0), initials-dict.k.at(0), "-"),
     "頁",
     "|"
   )
+- Jyutcitzi with tone: #jyutcitzi("seng2")
 
 // Test a multi-line space-delimited string containing jyutping
-#jyutcitzi("混合 jyut\tping faat\ncit zi 輸入")
+#jyutcitzi("混合 jyut\tping faat3\ncit zi 輸入， zung3 zi1 wun4 sing1 dyu6 。")

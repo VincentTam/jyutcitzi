@@ -5,9 +5,8 @@
 
 // Case A: Syllablic nasals (m or ng)
 #let re-nasal = regex("\b(m|ng)" + jp-tones + "?\b")
-
 // Case B: Other cases
 #let re-other = regex("\b" + jp-initials + "?" + jp-finals + "?" + jp-tones + "?\b")
 
 /// Split jyutping into beginning & ending
-#let split-jyutping(jyutping) = (jp-initials, jp-finals).map(re => jyutping.find(regex(re)))
+#let split-jyutping(jyutping) = (jp-initials, jp-finals, jp-tones).map(re => jyutping.find(regex(re)))

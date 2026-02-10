@@ -18,8 +18,8 @@ A Typst package for rendering
 
 #jyutcitzi("keu leu liu lang")嘅粵字
 
-"Skill"#jyutcitzi("ge jyut zi")係「#combine-parts(
-  combine-parts(beginnings-dict.s.at(0), beginnings-dict.k.at(0), "-"),
+"Skill"#jyutcitzi("ge3 jyut6 zi6 m4")係「#combine-parts(
+  combine-parts(initials-dict.s.at(0), initials-dict.k.at(0), "-"),
   "么",
   "|"
 )」。
