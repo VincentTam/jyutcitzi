@@ -12,18 +12,16 @@ A Typst package for rendering
 ## Usage
 
 ```typst
-#import "@preview/se-jyutcitzi:0.2.4": *
+#import "@preview/se-jyutcitzi:0.2.5": *
 #set page(height: auto, width: auto, margin: 4pt)
+// #set text(bottom-edge: "descender", top-edge: "ascender")
 // Set to any font that contains the Jyutcitzi alphabets
 #set text(font: "Noto Sans CJK TC")
 
 #jyutcitzi("keu leu liu lang")嘅粵字
 
-"Skill"#jyutcitzi("ge3 jyut6 zi6 m3 hm1")係「#combine-parts(
-  combine-parts(initials-dict.s.at(0), initials-dict.k.at(0), "-"),
-  "么",
-  "|"
-)」。
+"Skill"#"ge3 jyut6 zi6 m3 hm1".split().map(jyutcitzi).join()係「#combine-3parts("厶", "臼", "么", "tbr")」。\
+"Cheese"#"ge hai".split().map(jyutcitzi).join()「#combine-3parts("此", "子", "厶", "lrb", tone: "1")」。
 ```
 
 ![jyutcitzi sample](sample.png)

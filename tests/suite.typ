@@ -1,4 +1,4 @@
-#import "../lib.typ": jyutcitzi, combine-parts, initials-dict, finals-dict
+#import "../lib.typ": jyutcitzi, combine-3parts, initials-dict, finals-dict
 
 #set page(width: auto, height: auto, margin: 10pt)
 #set text(font: "Noto Sans CJK TC")
@@ -12,11 +12,7 @@
 - Null initial: #jyutcitzi("aa")
 - Null final: #jyutcitzi("s")
 - Compound initial:
-  #combine-parts(
-    combine-parts(initials-dict.s.at(0), initials-dict.k.at(0), "-"),
-    "頁",
-    "|"
-  )
+  #combine-3parts(initials-dict.s.at(0), initials-dict.k.at(0), "頁", "tbr")
 - Jyutcitzi with tone: #jyutcitzi("seng2")
 
 // Test a multi-line space-delimited string containing jyutping

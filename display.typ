@@ -51,3 +51,39 @@
     }
   }
 }
+
+#let combine-3parts(part1, part2, part3, combine-mode, tone: none) = {
+  set text(bottom-edge: "descender", top-edge: "ascender")
+  let combined
+  let tone-mapped = if tone != none { tone-map.at(tone) } else { none }
+  let part12
+  let combined
+  // ┫ = Top, Bottom, Right
+  if combine-mode == "tbr" {
+    part12 = box(
+      rotate(
+        90deg,
+        scale(
+          [#box(rotate(-90deg, part1))#box(rotate(-90deg, part2))],
+          origin: bottom+left,
+          x: 50%,
+          reflow: true
+        )
+      ),
+      baseline: 0.12em
+    )
+    combined = scale(box[#part12#part3], x: 50%, reflow: true, origin: bottom + left)
+  } else { // ┻ = Left, Right, Bottom
+    part12 = scale([#part1#part2], origin: bottom+left, x: 50%, reflow: true)
+    combined = rotate(
+      90deg,
+      scale(
+        [#box(rotate(-90deg, part12))#box(rotate(-90deg, part3))],
+        origin: bottom+left,
+        x: 50%,
+        reflow: true
+      )
+    )
+  }
+  box(baseline: 0.12em, stack(combined, tone-mapped, dir: ltr))
+}
