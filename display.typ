@@ -5,7 +5,6 @@
 /// - "-" for stacking part 1 on top of part 2;
 /// - "|" for combining them side-by-side
 #let combine-parts(part1, part2, combine-mode, tone: none) = {
-  set text(bottom-edge: "descender", top-edge: "ascender")
   let combined
   let tone-mapped = if tone != none { tone-map.at(tone) } else { none }
   if combine-mode == "-" {
@@ -27,6 +26,7 @@
 /// Transform jyutping (without digit) to jyutcitzi
 #let simple-jyutcitzi-display(jp-initial, jp-final, tone: none) = {
   if jp-initial != none or jp-final != none {
+    set text(bottom-edge: "descender", top-edge: "ascender")
     let part1
     let part2
     let combine-mode
