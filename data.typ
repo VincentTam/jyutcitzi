@@ -1,4 +1,4 @@
-// Dictionary mapping Jyutping initials to Jyutcitzi part 1 and combine mode
+/// Dictionary mapping Jyutping initials to Jyutcitzi part 1 and combine mode
 #let initials-dict = (
   a: ("⺍", "-"),
   b: ("比", "-"),
@@ -22,7 +22,23 @@
   ng: (scale([乂乂], x: 50%, reflow: true), "-"),
 )
 
-// Dictioary mapping Jyutping finals to Jyutcitzi part 2
+/// Return the Jyutcitzi for syllabic nasal sounds
+#let syllabic-nasal-char(jp-initial) = {
+  set text(bottom-edge: "descender", top-edge: "ascender")
+  let part13 = scale([一], 90%)
+  let part22 = scale([乂], 75%)
+  let dot-box = box(text(bottom-edge: "descender", top-edge: "bounds")[ˎ])
+  let dot-dy = if jp-initial == "m" { -0.2em } else if jp-initial == "ng" { 0.2em }
+  let dot-pos = if jp-initial == "m" { bottom + right } else if jp-initial == "ng" { top + right }
+  box(baseline: 0.12em)[
+    #place(part13, dy: 0.4em)
+    #part22
+    #place(bottom, part13, dy: -0.3em)
+    #place(dot-pos, dy: dot-dy, dot-box)
+  ]
+}
+
+/// Dictioary mapping Jyutping finals to Jyutcitzi part 2
 #let finals-dict = (
   aa: "乍",
   aai: "介",
@@ -80,13 +96,15 @@
   yu: "仒",
   yun: "元",
   yut: "乙",
+  m: syllabic-nasal-char("m"),
+  ng: syllabic-nasal-char("ng"),
 )
 
 // Tone map for Jyutcitzi
 #let tone-map = (
   "1": "'",
   "2": "ˊ",
-  "3": "ˋ",
+  "3": "`",
   "4": "\"",
   "5": "˝",
   "6": "ﾞ",

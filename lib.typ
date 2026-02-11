@@ -3,13 +3,10 @@
 #import "display.typ": *
 
 #let jyutcitzi(input) = {
-  show re-other: m => {
+  show regex(jp-initials): m => simple-jyutcitzi-display(m.text, none, tone: none)
+  show regex-jyutping: m => {
     let (jp-initial, jp-final, jp-tone) = split-jyutping(m.text)
     simple-jyutcitzi-display(jp-initial, jp-final, tone: jp-tone)
-  }
-  show re-nasal: m => {
-    let (jp-initial, jp-final, jp-tone) = split-jyutping(m.text)
-    syllabic-nasal-char(jp-initial, tone: jp-tone)
   }
   show regex(" "): m => ""
   input

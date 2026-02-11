@@ -12,13 +12,14 @@ A Typst package for rendering
 ## Usage
 
 ```typst
-#import "@preview/se-jyutcitzi:0.2.2": *
+#import "@preview/se-jyutcitzi:0.2.3": *
+#set page(height: auto, width: auto, margin: 4pt)
 // Set to any font that contains the Jyutcitzi alphabets
 #set text(font: "Noto Sans CJK TC")
 
 #jyutcitzi("keu leu liu lang")嘅粵字
 
-"Skill"#jyutcitzi("ge3 jyut6 zi6 m4")係「#combine-parts(
+"Skill"#jyutcitzi("ge3 jyut6 zi6 m3 hm1")係「#combine-parts(
   combine-parts(initials-dict.s.at(0), initials-dict.k.at(0), "-"),
   "么",
   "|"
