@@ -32,11 +32,11 @@
     let combine-mode
     if jp-initial == none and (jp-final == "m" or jp-final == "ng") {
       let tone-mapped = if tone != none { tone-map.at(tone) } else { none }
-      box(baseline: 0.12em, stack(finals-dict.at(jp-final), tone-mapped, dir: ltr))
+      box(baseline: 0.12em, stack(finals-dict.at(jp-final).at(0), tone-mapped, dir: ltr))
     } else {
       if jp-initial == none {
         part1 = initials-dict.a.at(0)
-        part2 = finals-dict.at(jp-final)
+        part2 = finals-dict.at(jp-final).at(0)
         combine-mode = "-"
       } else if jp-final == none {
         part1 = initials-dict.a.at(0)
@@ -44,7 +44,7 @@
         combine-mode = "-"
       } else {
         part1 = initials-dict.at(jp-initial).at(0)
-        part2 = finals-dict.at(jp-final)
+        part2 = finals-dict.at(jp-final).at(0)
         combine-mode = initials-dict.at(jp-initial).at(1)
       }
       combine-parts(part1, part2, combine-mode, tone: tone)
