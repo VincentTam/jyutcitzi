@@ -1,11 +1,36 @@
-/// Define the jyutping initials, finals and the tone set
+#import "data.typ": *
+
+/// Define the Jyutping initials, finals and the tone set
 #let jp-tones = "([1-6])"
 #let jp-initials = "(ng|gw|kw|[bpmfdtnlgkhzcsjw])"
 #let jp-finals = "((aa|oe|eo|yu|[aeiou])(ng|[iumnptk])?|m|ng)"
-// Regex for a jyutping
+// Regex for a Jyutping
 #let regex-jyutping = regex("\b" + jp-initials + "?" + jp-finals + jp-tones + "?\b")
 
-/// Split jyutping into beginning & ending
+/// Split Jyutping into beginning & ending
 #let split-jyutping(jyutping) = {
   (0, 1, 4).map(n => jyutping.match(regex-jyutping).captures.at(n))
+}
+
+/// Define the Jyutcitzi initials & finals
+#let jc-initials = (..initials-dict.values().map(v => v.slice(0, -1))).flatten().filter(val => type(val) == str)
+#let jc-initials-str = "([" + jc-initials.join() + "])"
+#let jc-finials = finals-dict.values().flatten().filter(val => type(val) == str)
+#let jc-finals-str = "([" + jc-finials.join() + "])"
+// Regex for a simple Jyutcitzi
+#let regex-simple-jyutcitzi = regex("\b" + jc-initials-str + "?" + jc-finals-str + jp-tones + "?\b")
+
+/// Split the Jyutcitzi input string into Jyutcitzi and tone
+#let split-simple-jyutcit(jc-str) = range(3).map(n => jc-str.match(regex-simple-jyutcitzi).captures.at(n))
+
+/// Reverse initial dict lookup
+#let reverse-init-dict-lookup(jc-initial) = {
+  let key-match = initials-dict.pairs().find(p => p.at(1).slice(0, -1).contains(jc-initial))
+  if key-match != none { return key-match.at(0) }
+}
+
+/// Reverse final dict lookup
+#let reverse-final-dict-lookup(jc-final) = {
+  let key-match = finals-dict.pairs().find(p => p.at(1).contains(jc-final))
+  if key-match != none { return key-match.at(0) }
 }

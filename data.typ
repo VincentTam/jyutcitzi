@@ -1,6 +1,6 @@
 /// Dictionary mapping Jyutping initials to Jyutcitzi part 1 and combine mode
 #let initials-dict = (
-  a: ("⺍", "-"),
+  a: ("⺍", "⺌", "-"),
   b: ("比", "-"),
   p: ("并", "|"),
   m: ("文", "-"),
@@ -19,22 +19,25 @@
   w: ("禾", "-"),
   gw: ("古", "|"),
   kw: ("夸", "|"),
-  ng: (scale([乂乂], x: 50%, reflow: true), "-"),
+  ng: (scale([乂乂], x: 50%, reflow: true), "爻", "-"),
 )
 
-/// Return the Jyutcitzi for syllabic nasal sounds
-#let syllabic-nasal-char(jp-initial) = {
+/// Return the Jyutcitzi for syllabic nasal sounds：
+/// `m` / `ng` → "一乂一 with 、"; otherwise → "一乂一 without 、"
+#let syllabic-nasal-char(jp-final) = {
   set text(bottom-edge: "descender", top-edge: "ascender")
   let part13 = scale([一], 90%)
   let part22 = scale([乂], 75%)
   let dot-box = box(text(bottom-edge: "descender", top-edge: "bounds")[ˎ])
-  let dot-dy = if jp-initial == "m" { -0.2em } else if jp-initial == "ng" { 0.2em }
-  let dot-pos = if jp-initial == "m" { bottom + right } else if jp-initial == "ng" { top + right }
+  let dot-dy = if jp-final == "m" { -0.2em } else if jp-final == "ng" { 0.2em }
+  let dot-pos = if jp-final == "m" { bottom + right } else if jp-final == "ng" { top + right }
   box(baseline: 0.12em)[
     #place(part13, dy: 0.4em)
     #part22
     #place(bottom, part13, dy: -0.3em)
-    #place(dot-pos, dy: dot-dy, dot-box)
+    #if jp-final == "m" or jp-final == "ng" {
+      place(dot-pos, dy: dot-dy, dot-box)
+    }
   ]
 }
 
@@ -54,8 +57,8 @@
   am: ("令",),
   an: ("云",),
   ang: ("亙",),
-  ap: ("乜",),
-  at: ("七",),
+  ap: ("十",),
+  at: ("乜",),
   ak: ("仄",),
   e: ("旡",),
   ei: ("丌",),
@@ -96,7 +99,8 @@
   yu: ("仒",),
   yun: ("元",),
   yut: ("乙",),
-  m: (syllabic-nasal-char("m"), "太", "乂", "㐅"),
+  mng: (syllabic-nasal-char(""), "乂", "㐅"),
+  m: (syllabic-nasal-char("m"), "太"),
   ng: (syllabic-nasal-char("ng"), "犬"),
 )
 
