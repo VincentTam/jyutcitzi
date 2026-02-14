@@ -12,7 +12,7 @@ A Typst package for rendering
 ## Usage
 
 ```typst
-#import "@preview/se-jyutcitzi:0.2.7": *
+#import "@preview/se-jyutcitzi:0.2.8": *
 #set page(height: auto, width: auto, margin: 4pt)
 // #set text(bottom-edge: "descender", top-edge: "ascender")
 // Set to any font that contains the Jyutcitzi alphabets

@@ -56,7 +56,7 @@
 /// Get Jyutcit alphabet from Jyutping final
 #let get-jc-from-jp-final(jp-final) = {
   if jp-final == none { return "" }
-  if jp-final != "ng" {
+  if jp-final != "ng" and jp-final != "m" {
     finals-dict.at(jp-final).at(0)
   } else {
     finals-dict.at(jp-final).at(1)
