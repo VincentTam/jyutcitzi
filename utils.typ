@@ -1,15 +1,31 @@
 #import "data.typ": *
 
 /// Define the Jyutping initials, finals and the tone set
-#let jp-tones = "([1-6])"
 #let jp-initials = "(ng|gw|kw|[bpmfdtnlgkhzcsjw])"
 #let jp-finals = "((aa|oe|eo|yu|[aeiou])(ng|[iumnptk])?|m|ng)"
-// Regex for a Jyutping
+#let jp-tones = "([1-6])"
+// Regex for a Jyut6ping3
 #let regex-jyutping = regex("\b" + jp-initials + "?" + jp-finals + jp-tones + "?\b")
+// Regex for an "extended Jyutping" with compound initials (CCV)
+#let regex-jp-ccv = regex("\b" + jp-initials + jp-initials + jp-finals + jp-tones + "?\b")
+// Regex for an "extended Jyutping" with both initial & final consonant (CVC)
+#let regex-jp-cvc = regex("\b" + jp-initials + "?" + jp-finals + jp-initials + jp-tones + "?\b")
 
-/// Split Jyutping into beginning & ending
-#let split-jyutping(jyutping) = {
-  (0, 1, 4).map(n => jyutping.match(regex-jyutping).captures.at(n))
+/// Split (extended) `jyutping` into "Jyutping tuple"
+/// - `jyutping`: jyut6ping3 input string, tones are optional
+/// - `split-mode`:
+///   - `"simple"`: consonant (initial) + vowel (final)
+///   - `"CCV"`: compound initial (i.e. two consonants)
+///   - `"CVC"`: both initial and final consonants
+#let split-jyutping(jyutping, split-mode: "simple") = {
+  let split-dict = (
+    "simple": ((0, 1, -1), regex-jyutping),
+    "CCV": ((0, 1, 2, 5), regex-jp-ccv),
+    "CVC": ((0, 1, 4, 5), regex-jp-cvc),
+  )
+  let split-capture-grps = split-dict.at(split-mode).at(0)
+  let split-regex = split-dict.at(split-mode).at(1)
+  split-capture-grps.map(n => jyutping.match(split-regex).captures.at(n))
 }
 
 /// Define the Jyutcitzi initials & finals
