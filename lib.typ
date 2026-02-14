@@ -2,12 +2,17 @@
 #import "display.typ": *
 #import "utils.typ": *
 
-#let jyutcitzi(input) = {
+#let jyutcitzi(input, merge-nasals: false) = {
   show regex(" "): m => ""
   // Render Jyutcitzi from Jyutci alphabets
-  show regex-simple-jyutcitzi: m => {
-    let (jc-initial, jc-final, jc-tone) = split-simple-jyutcit(m.text)
-    display-from-simple-jc-tuple(jc-initial, jc-final, tone: jc-tone)
+  show regex-jyutcitzi: m => {
+    let (split-mode, split-tuple) = split-jyutcit(m.text)
+    if split-tuple.len() < 4 {
+      let (jc-initial, jc-final, jc-tone) = split-tuple
+      display-from-simple-jc-tuple(jc-initial, jc-final, tone: jc-tone, merge-nasals: merge-nasals)
+    } else {
+      display-from-long-jc-tuple(..split-tuple.slice(0, -1), tone: split-tuple.at(-1), mode: split-mode, merge-nasals: merge-nasals)
+    }
   }
   // Convert standalone Jyutping alphabet to Jyutcit alphabet
   show regex("\b" + jp-initials + "\b"): m => get-jc-from-jp-init(m.text)
