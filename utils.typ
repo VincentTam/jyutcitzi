@@ -18,10 +18,18 @@
 #let jc-finials = finals-dict.values().flatten().filter(val => type(val) == str)
 #let jc-finals-str = "([" + jc-finials.join() + "])"
 // Regex for a simple Jyutcitzi
-#let regex-simple-jyutcitzi = regex("\b" + jc-initials-str + "?" + jc-finals-str + jp-tones + "?\b")
+#let regex-simple-jyutcitzi = regex("\b(" + jc-initials-str + "?" + jc-finals-str + jp-tones + "?|" + jc-initials-str + ")\b")
 
-/// Split the Jyutcitzi input string into Jyutcitzi and tone
-#let split-simple-jyutcit(jc-str) = range(3).map(n => jc-str.match(regex-simple-jyutcitzi).captures.at(n))
+/// Split the Jyutcitzi input string into Jyutcitzi tuple
+#let split-simple-jyutcit(jc-str) = {
+  let jc-match = jc-str.match(regex-simple-jyutcitzi)
+  if jc-match == none { return }
+  if jc-match.captures.at(-1) == none {
+    range(1, 4).map(n => jc-str.match(regex-simple-jyutcitzi).captures.at(n))
+  } else {
+    (jc-match.captures.at(-1), none, none)
+  }
+}
 
 /// Reverse initial dict lookup
 #let reverse-init-dict-lookup(jc-initial) = {
@@ -33,4 +41,24 @@
 #let reverse-final-dict-lookup(jc-final) = {
   let key-match = finals-dict.pairs().find(p => p.at(1).contains(jc-final))
   if key-match != none { return key-match.at(0) }
+}
+
+/// Get Jyutcit alphabet from Jyutping initial
+#let get-jc-from-jp-init(jp-initial) = {
+  if jp-initial == none { return "" }
+  if jp-initial != "ng" {
+    initials-dict.at(jp-initial).at(0)
+  } else {
+    initials-dict.at(jp-initial).at(1)
+  }
+}
+
+/// Get Jyutcit alphabet from Jyutping final
+#let get-jc-from-jp-final(jp-final) = {
+  if jp-final == none { return "" }
+  if jp-final != "ng" {
+    finals-dict.at(jp-final).at(0)
+  } else {
+    finals-dict.at(jp-final).at(1)
+  }
 }

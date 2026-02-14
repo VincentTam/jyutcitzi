@@ -1,18 +1,22 @@
-#import "utils.typ": *
-// #import "data.typ": *
+#import "data.typ"
 #import "display.typ": *
+#import "utils.typ": *
 
 #let jyutcitzi(input) = {
   show regex(" "): m => ""
-  show regex(jp-initials): m => simple-jyutcitzi-display(m.text, none, tone: none)
+  // Render Jyutcitzi from Jyutci alphabets
+  show regex-simple-jyutcitzi: m => {
+    let (jc-initial, jc-final, jc-tone) = split-simple-jyutcit(m.text)
+    display-from-simple-jc-tuple(jc-initial, jc-final, tone: jc-tone)
+  }
+  // Convert Jyut6ping3 to Jyutcit alphabets
   show regex-jyutping: m => {
     let (jp-initial, jp-final, jp-tone) = split-jyutping(m.text)
-    simple-jyutcitzi-display(jp-initial, jp-final, tone: jp-tone)
+    let jc-initial = get-jc-from-jp-init(jp-initial)
+    let jc-final = get-jc-from-jp-final(jp-final)
+    jc-initial + jc-final + jp-tone
   }
-  // show regex-simple-jyutcitzi: m => {
-  //   let (jc-initial, jc-final, jc-tone) = split-simple-jyutcit(m.text)
-  //   display-from-simple-jc-tuple(jc-initial, jc-final, tone: jc-tone)
-  // }
-  // show regex(jc-initials-str): m => combine-parts("", m.text, "-", tone: none)
+  // Convert standalone Jyutping alphabet to Jyutcit alphabet
+  show regex("\b" + jp-initials + "\b"): m => get-jc-from-jp-init(m.text)
   input
 }
