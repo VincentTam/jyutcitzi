@@ -12,7 +12,7 @@ A Typst package for rendering
 ## Usage
 
 ```typst
-#import "@preview/se-jyutcitzi:0.3.0": *
+#import "@preview/se-jyutcitzi:0.3.1": *
 #set page(height: auto, width: auto, margin: 4pt)
 // Set to any font that contains the Jyutcitzi alphabets
 #set text(font: "AR PL KaitiM Big5")

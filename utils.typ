@@ -3,7 +3,7 @@
 /// Define the Jyutping initials, finals and the tone set
 #let jp-initials = "(ng|gw|kw|[bpmfdtnlgkhzcsjw])"
 #let jp-finals = "((aa|oe|eo|yu|[aeiou])(ng|[iumnptk])?|m|ng)"
-#let jp-tones = "([1-6])"
+#let jp-tones = "([1-9])"
 // Regex for a Jyut6ping3
 #let regex-jyutping = regex("\\b" + jp-initials + "?" + jp-finals + jp-tones + "?\\b")
 // Regex for an "extended Jyutping" with compound initials (CCV)
