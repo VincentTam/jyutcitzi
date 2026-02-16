@@ -1,6 +1,16 @@
 #import "utils.typ": *
 #import "data.typ": *
 
+// Put each tone mark inside a half-width box for correct vertical alignment
+// with full-width characters
+#let tone-box(c) = {
+  if c == none { return }
+  box(height: 1em, width: 0.5em, baseline: 0.12em)[
+    #set text(bottom-edge: "bounds", top-edge: "bounds")
+    #c
+  ]
+}
+
 /// Combine 2 parts: combine mode
 /// - "-" for stacking part 1 on top of part 2;
 /// - "|" for combining them side-by-side
@@ -20,7 +30,7 @@
   } else {
     combined = scale([#part1#part2], origin: bottom+left, x: 50%, reflow: true)
   }
-  box(baseline: 0.12em, stack(combined, tone-mapped, dir: ltr))
+  box(baseline: 0.12em, stack(combined, tone-box(tone-mapped), dir: ltr))
 }
 
 /// Transform Jyut6ping3 to Jyutcitzi
@@ -35,7 +45,7 @@
   // standalone syllabic nasal sounds
   if jp-initial == none and (finals-dict-key == "m" or finals-dict-key == "ng" or finals-dict-key == "mng") {
     let tone-mapped = if tone != none { tone-map.at(tone) } else { none }
-    return box(baseline: 0.12em, stack(finals-dict.at(finals-dict-key).at(0), tone-mapped, dir: ltr))
+    return box(baseline: 0.12em, stack(finals-dict.at(finals-dict-key).at(0), tone-box(tone-mapped), dir: ltr))
   }
   if jp-initial == none {
     // no initial
@@ -90,7 +100,7 @@
       )
     )
   }
-  box(baseline: 0.12em, stack(combined, tone-mapped, dir: ltr))
+  box(baseline: 0.12em, stack(combined, tone-box(tone-mapped), dir: ltr))
 }
 
 /// Transform simple Jyutcit alphabet sequence to Jyutcitzi
@@ -118,7 +128,7 @@
   // standalone syllabic nasal sounds
   if jc-initial == none and (finals-dict-key == "m" or finals-dict-key == "ng" or finals-dict-key == "mng") {
     let tone-mapped = if tone != none { tone-map.at(tone) } else { none }
-    return box(baseline: 0.12em, stack(finals-dict.at(finals-dict-key).at(0), tone-mapped, dir: ltr))
+    return box(baseline: 0.12em, stack(finals-dict.at(finals-dict-key).at(0), tone-box(tone-mapped), dir: ltr))
   }
   // store parts to be combined later
   let part1
